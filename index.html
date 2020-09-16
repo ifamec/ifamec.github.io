@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en_US">
+<style>
+    body, html, .main {
+        height: 100%;
+        margin: 0;
+    }
+
+    .middle {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+    }
+
+    #time {
+        margin: 10%;
+    }
+
+    hr {
+        margin: auto;
+        width: 40%;
+    }
+</style>
+<body>
+<div class="main">
+    <div class="middle">
+        <h1>COMING SOON</h1>
+        <hr>
+        <div id="time"> NOW  </div>
+    </div>
+    <svg width="100%" height="100%">
+        <defs>
+            <pattern id="polka-dots" x="0" y="0" width="64" height="64" patternUnits="userSpaceOnUse">
+                <!--            <circle fill="#d3d3d3" cx="1" cy="1" r="1"></circle>-->
+                <line x1="0" y1="0" x2="8" y2="8" stroke="lightgrey" stroke-width="2" />
+                <line x1="0" y1="8" x2="8" y2="0" stroke="lightgrey" stroke-width="2" />
+            </pattern>
+        </defs>
+        <rect x="0" y="0" width="100%" height="100%" fill="url(#polka-dots)"></rect>
+    </svg>
+</div>
+
+</body>
+<script>
+    setInterval(function () {
+        var m = new Date();
+        function n(d) {return ("0" + d).slice(-2)};
+        document.querySelector("#time").innerHTML = [m.getFullYear(), n(m.getMonth() + 1), n(m.getDate())].join("-") + " " + [n(m.getHours()), n(m.getMinutes()), n(m.getSeconds())].join(":");
+    }, 1000);
+</script>
+</html>
+
