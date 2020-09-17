@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>2020 Post</title>
+<!--    <base href="/post/2020/">-->
+</head>
+<body>
+    <div id="content"></div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+        $(function(){
+            $.ajax({
+                type:"get",
+                url:"./src/0916_Test.md",
+                dataType:"html",
+                success:function(res){
+                    $("#content").append(marked(res));
+                }
+            })
+        })
+    </script>
+</body>
+</html>
