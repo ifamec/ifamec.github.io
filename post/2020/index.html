@@ -2,24 +2,77 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>2020 Post</title>
-<!--    <base href="/post/2020/">-->
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
+
+        .content {
+            width: 100%;
+            height: 100%;
+            display: block;
+            padding: 32px;
+            position: absolute;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn-sidebar {
+            background-color: lightgray;
+            border: none;
+            color: black;
+            cursor: pointer;
+            font-size: 20px;
+            padding: 8px 16px;
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            z-index: 16;
+        }
+        .btn-sidebar:hover {
+            background-color: darkgray;
+        }
+        .sidebar {
+            background-color: darkgray;
+            height: 100%;
+            left: 0;
+            opacity: 90%;
+            overflow-x: hidden;
+            padding-top: 60px;
+            position: fixed;
+            top: 0;
+            transition: 0.5s;
+            width: 320px;
+            z-index: 1;
+        }
+        .sidebar a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 16px;
+            color: black;
+            display: block;
+            transition: 0.3s;
+        }
+
+    </style>
 </head>
 <body>
-    <div id="content"></div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <script>
-        $(function(){
-            $.ajax({
-                type:"get",
-                url:"./src/0916_Test.md",
-                dataType:"html",
-                success:function(res){
-                    $("#content").append(marked(res));
-                }
-            })
-        })
-    </script>
+<div id="sidebar" class="sidebar">
+    <a href="#" title="0916_Test">0916_Test</a>
+    <a href="#">L2</a>
+    <a href="#">L3</a>
+    <a href="#">L4</a>
+</div>
+<div class="main">
+    <button class="btn-sidebar" id="btn-sidebar"></button>
+    <div class="content" id="content">Please Select From Panel</div>
+</div>
+<script src="../../lib/jquery.min.js"></script>
+<script src="../../lib/marked.min.js"></script>
+<script src="index.js"></script>
+
 </body>
 </html>
