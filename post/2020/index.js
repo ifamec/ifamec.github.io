@@ -1,13 +1,31 @@
 const loadContent = (url) => { //'./src/0916_Test.md'
     $.ajax({
         type: 'get',
-        url: 'src/' + url + '.md',
+        url: 'src/' + url,
         dataType: 'html',
-        success: function (res) {
+        success: (res) => {
             $('#content').html(marked(res));
         }
     })
 }
+const buildSidebarList = (list) => {
+    list.forEach( i => {
+        const a = $('<a href="#" title="' + i + '"> ' + i + ' </a>')
+        $('#sidebar').append(a)
+    })
+}
+
+(() => {
+    $.ajax({
+        type:'get',
+        url: 'meta.json',
+        dataType: 'json',
+        success: (res) => {
+            const fileName = res.filename || []
+            buildSidebarList(fileName)
+        }
+    })
+})()
 
 let isSidebarHidden = false;
 $('#btn-sidebar').text(isSidebarHidden ? '☰' : '✕');
