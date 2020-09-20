@@ -1,6 +1,7 @@
 # Updates
 
 - Sept 2020
+    - 2020-09-19: `/post`: Modify sidebar behavior, add `favicon` & new `.md` main file, show default `.md` on pageload
     - 2020-09-18: `/post`: Use NodeJS to build meta file 
     - 2020-09-17: `/post`: Add sidebar, render `.md` through click event
     - 2020-09-16: `/post`: Render `.md` to `html`

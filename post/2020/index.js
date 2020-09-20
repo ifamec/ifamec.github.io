@@ -27,11 +27,15 @@ const buildSidebarList = (list) => {
     })
 })()
 
+loadContent('0919_Main.md')
+
 let isSidebarHidden = false;
+// initial sidebar
 $('#btn-sidebar').text(isSidebarHidden ? '☰' : '✕');
+$('.sidebar').css('width', isSidebarHidden ? '0' : '320px');
 
 $(document).on('click', function (e) {
-    const target =      $(e.target)
+    const target =    $(e.target)
     let sidebar =     $('#sidebar')
     let btn_sidebar = $('#btn-sidebar')
 
