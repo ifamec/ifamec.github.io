@@ -1,4 +1,27 @@
+let latestFileName, fileNameList;
+const isLatestDefault = true;
+
+(() => {
+    $.ajax({
+        type:'get',
+        url: 'meta.json',
+        dataType: 'json',
+        success: (res) => {
+            /**
+             * @param {{fileStat: Object}} res
+             * @param {{fileName: String}} o
+             */
+            const fileStat = res.fileStat || {}
+            fileNameList = fileStat.map( o => o.fileName )
+            latestFileName = fileNameList[0]
+            buildSidebarList(fileStat)
+            loadContent(isLatestDefault ? latestFileName : 'Main.md')
+        }
+    })
+})()
+const pushState = (url) => { history.pushState(undefined, '', url)}
 const loadContent = (url) => { //'./src/0916_Test.md'
+    url = fileNameList.includes(url) ? url : '404.md'
     $.ajax({
         type: 'get',
         url: 'src/' + url,
@@ -7,31 +30,33 @@ const loadContent = (url) => { //'./src/0916_Test.md'
             $('#content').html(marked(res));
         }
     })
+    pushState(`#${url.replace('.md', '')}`)
+    if (url === '404.md') {
+        setTimeout(() => {
+            loadContent(latestFileName)
+            pushState(`#${latestFileName.replace('.md', '')}`)
+        }, 5000)
+    }
+}
+const getYYMMDD = (date) => {
+    date = new Date(date)
+    const doubleDigit = (d) => ("0" + d).slice(-2)
+    return [date.getFullYear().toString().slice(-2), doubleDigit(date.getMonth() + 1), doubleDigit(date.getDate())].join("")
 }
 const buildSidebarList = (list) => {
     list.forEach( i => {
-        const a = $('<a href="#" title="' + i + '"> ' + i + ' </a>')
+        const href = i.fileName.replace('.md', '')
+        const title = `${getYYMMDD(i.birthtime)}-${href}`
+        const a = $('<a href="#' + href + '" title="' + title + '"> ' + title + ' </a>')
         $('#sidebar').append(a)
     })
+    $('#sidebar').append('<a href="#404" title="PageNotFound">Page Not Found</a>')
 }
 
-(() => {
-    $.ajax({
-        type:'get',
-        url: 'meta.json',
-        dataType: 'json',
-        success: (res) => {
-            const fileName = res.filename || []
-            buildSidebarList(fileName)
-        }
-    })
-})()
 
-loadContent('0919_Main.md')
-
-let isSidebarHidden = false;
+let isSidebarHidden = true;
 // initial sidebar
-$('#btn-sidebar').text(isSidebarHidden ? '☰' : '✕');
+$('#btn-sidebar').text(isSidebarHidden ? '☰' : '⨉');
 $('.sidebar').css('width', isSidebarHidden ? '0' : '320px');
 
 $(document).on('click', function (e) {
@@ -55,8 +80,8 @@ $(document).on('click', function (e) {
             if (! isSidebarHidden) { hideSidebar() }
             break;
     }
-    if (target.prop('tagName') && /^\d{4}_/i.test(target.attr('title'))) {
-        loadContent(target.attr('title'))
+    if (target.parent().attr('id') === 'sidebar' && target.attr('title')) {
+        loadContent(target.attr('title').replace(/^\d+-/, '') + '.md')
         hideSidebar()
     }
 })
