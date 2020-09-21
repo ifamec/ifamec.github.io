@@ -15,7 +15,7 @@ let validFile = file.filter((i) => /\bmd$/i.test(i) && i !== '404.md')
 if (validFile.length) {
     meta.fileStat = validFile.map(fn => {
         return {
-            fileName: fn,
+            fileName: fn.replace('.md', ''),
             birthtime: getFileBirthtime(`${postPath}${fn}`)
         }
     }).sort((o1, o2) => {

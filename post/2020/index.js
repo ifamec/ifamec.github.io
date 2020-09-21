@@ -15,26 +15,26 @@ const isLatestDefault = true;
             fileNameList = fileStat.map( o => o.fileName )
             latestFileName = fileNameList[0]
             buildSidebarList(fileStat)
-            loadContent(isLatestDefault ? latestFileName : 'Main.md')
+            loadContent(isLatestDefault ? latestFileName : 'Main')
         }
     })
 })()
 const pushState = (url) => { history.pushState(undefined, '', url)}
-const loadContent = (url) => { //'./src/0916_Test.md'
-    url = fileNameList.includes(url) ? url : '404.md'
+const loadContent = (url) => { //'./src/Test.md'
+    url = fileNameList.includes(url) ? url : '404'
     $.ajax({
         type: 'get',
-        url: 'src/' + url,
+        url: 'src/' + url + '.md',
         dataType: 'html',
         success: (res) => {
             $('#content').html(marked(res));
+            pushState(`#${url}`)
         }
     })
-    pushState(`#${url.replace('.md', '')}`)
-    if (url === '404.md') {
+    if (url === '404') {
         setTimeout(() => {
             loadContent(latestFileName)
-            pushState(`#${latestFileName.replace('.md', '')}`)
+            pushState(`#${latestFileName}`)
         }, 5000)
     }
 }
@@ -45,12 +45,12 @@ const getYYMMDD = (date) => {
 }
 const buildSidebarList = (list) => {
     list.forEach( i => {
-        const href = i.fileName.replace('.md', '')
-        const title = `${getYYMMDD(i.birthtime)}-${href}`
-        const a = $('<a href="#' + href + '" title="' + title + '"> ' + title + ' </a>')
+        const title = i.fileName.replace('.md', '')
+        const text = `${getYYMMDD(i.birthtime)}-${title}`
+        const a = $('<a title="' + title + '"> ' + text + ' </a>')
         $('#sidebar').append(a)
     })
-    $('#sidebar').append('<a href="#404" title="PageNotFound">Page Not Found</a>')
+    $('#sidebar').append('<a title="PageNotFound">Page Not Found</a>')
 }
 
 
@@ -81,7 +81,7 @@ $(document).on('click', function (e) {
             break;
     }
     if (target.parent().attr('id') === 'sidebar' && target.attr('title')) {
-        loadContent(target.attr('title').replace(/^\d+-/, '') + '.md')
+        loadContent(target.attr('title'))
         hideSidebar()
     }
 })
