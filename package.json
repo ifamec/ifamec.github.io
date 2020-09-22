@@ -4,7 +4,7 @@
   "description": "Build meta",
   "main": "index.js",
   "scripts": {
-    "build": "node ./src/build.js",
+    "build": "node ./src/meta_builder.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

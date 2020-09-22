@@ -52,7 +52,26 @@
             width: 0;
             z-index: 1;
         }
-        .sidebar a {
+        .sidebar-ttl, .sidebar-404 {
+            display: block;
+            font-size: 20px;
+            padding: 12px 0;
+            font-weight: bold;
+            white-space: nowrap;
+            margin: 0 auto;
+            width: 70%;
+        }
+        .sidebar-404 {
+            font-size: 16px;
+            color: white;
+            padding: 12px 12px;
+            text-align: center;
+            text-decoration: none;
+            background-color: darkred;
+            margin: 20px auto;
+            width: 50%;
+        }
+        .sidebar-btn {
             color: black;
             display: block;
             font-size: 16px;
@@ -60,14 +79,14 @@
             padding: 12px 12px 12px 32px;
             text-align: left;
             text-decoration: none;
-            transition: 0.3s;
             white-space: nowrap;
             width: 60%;
             background-color: darkgray;
         }
-        .sidebar a:hover {
+        .sidebar-btn:hover, .sidebar-404:hover {
             color: white;
             background-color: black;
+            cursor: pointer;
         }
 
     </style>
@@ -78,8 +97,8 @@
     <button class="btn-sidebar" id="btn-sidebar"></button>
     <div class="content" id="content">Please Select From Panel</div>
 </div>
-<script src="../../lib/jquery.min.js"></script>
-<script src="../../lib/marked.min.js"></script>
+<script src="../lib/jquery.min.js"></script>
+<script src="../lib/marked.min.js"></script>
 <script src="index.js"></script>
 
 </body>
