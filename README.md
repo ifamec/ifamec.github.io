@@ -1,6 +1,7 @@
 # Updates
 
 - Sept 2020
+    - 2020-09-22: `/post`: Add responsive design
     - 2020-09-21: `/post`: Refactor Code, add section in sidebar, solve local ide issue
     - 2020-09-20: `/post`: Show the latest post by default, 404-page redirect to latest in 5 seconds, update url based on content loaded, refactor data flow
     - 2020-09-19: `/post`: Modify sidebar behavior, add `favicon` & new `.md` main file, show default `.md` on pageload

@@ -1,6 +1,7 @@
 // Define Variable
-let latestFileName, fileNameList, queryObject, isDebugMode, fileYearList;
+let latestFileName, fileNameList, queryObject, isDebugMode, fileYearList, isMobile;
 // Set State
+const devDebugMode = window.location.hostname === 'localhost';
 const isLatestDefault = true;
 let isSidebarHidden = true;
 
@@ -63,41 +64,61 @@ const loadContent = (url) => {
              * @param {{enableDebugMode: String}} queryObject
              */
             queryObject = new URLSearchParams(window.location.search.slice(1))
-            isDebugMode = queryObject.get('enableDebugMode') === 'true'
+            isDebugMode = queryObject.get('enableDebugMode') === 'true' || devDebugMode
 
             const fileStat = res.fileStat || {}
             fileNameList = fileStat.map( o => o.fileName )
             fileYearList = Array.from(new Set(fileStat.map( o => getDateInfo(o.birthtime, 'YYYY')))).sort()
             latestFileName = fileNameList[0]
+            isMobile = matchMedia('(max-width: 480px)').matches
             buildSidebarList(fileStat)
             loadContent(isLatestDefault ? latestFileName : 'Main')
         }
     })
     // Sidebar Initiation
-    $('#btn-sidebar').text(isSidebarHidden ? '☰' : '⨉');
-    $('.sidebar').css('width', isSidebarHidden ? '0' : '320px');
-    $(document).on('click', function (e) {
-        const target =    $(e.target)
-        let sidebar =     $('#sidebar')
-        let btn_sidebar = $('#btn-sidebar')
+    const setSidebarWidth = (wid) => {
+        const sidebarWidth = isSidebarHidden ? '0' : (isMobile ? '100%' : '320px')
+        $('#sidebar').css('width', wid || sidebarWidth)
+    }
+    const setSidebarText = (str) => {
+        const sidebarText = str ? str : (isSidebarHidden ? '☰' : '⨉')
+        $('#btn-sidebar').text(sidebarText)
+    }
+    const updateSidebar = (w, s) => {
+        setSidebarWidth(w)
+        setSidebarText(s)
+    }
+    const hideSidebar = () => {
+        updateSidebar('0px', '☰')
+        isSidebarHidden = !isSidebarHidden
+    }
+    // Initial sidebar state
+    updateSidebar()
 
-        const hideSidebar = () => {
-            sidebar.css('width', '0px');
-            btn_sidebar.text('☰');
-            isSidebarHidden = !isSidebarHidden;
-        }
+    // Window Resize eventListener
+    $(window).on('resize', () => {
+        isMobile = matchMedia('(max-width: 480px)').matches
+        setSidebarWidth()
+    })
+    // Container click eventListener
+    $('#container').on('click', (e) => {
+        const target = $(e.target)
+        // If click on container but not on btn-sidebar, hide sidebar
+        if (target.attr('id') !== 'btn-sidebar' && ! isSidebarHidden) { hideSidebar() }
+    })
+    // General document click eventListener
+    $(document).on('click',  (e) => {
+        const target =    $(e.target)
+        const targetTitle = target.attr('title')
+
+        if (isDebugMode) { console.log(target) }
+
         switch (target.attr('id')) {
             case 'btn-sidebar':
-                sidebar.css('width', isSidebarHidden ? '320px' : '0px');
                 isSidebarHidden = !isSidebarHidden;
-                btn_sidebar.text(isSidebarHidden ? '☰' : '✕');
-                break;
-            case 'content':
-                if (! isSidebarHidden) { hideSidebar() }
+                updateSidebar()
                 break;
         }
-
-        const targetTitle = target.attr('title')
         if (targetTitle && (/^sidebar-\d{4}/i.test(target.parent().attr('id')) || targetTitle === 'PageNotFound' )) {
             loadContent(target.attr('title'))
             hideSidebar()
