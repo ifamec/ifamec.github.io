@@ -1,6 +1,10 @@
 # Updates
+- Remain Issue
+    - webkit behaves odd (backdrop-filter not working, white space shows up while scrolls over)
+
 
 - Sept 2020
+    - 2020-09-23: `/tool`: New tool initial
     - 2020-09-22: `/post`: Add responsive design
     - 2020-09-21: `/post`: Refactor Code, add section in sidebar, solve local ide issue
     - 2020-09-20: `/post`: Show the latest post by default, 404-page redirect to latest in 5 seconds, update url based on content loaded, refactor data flow
