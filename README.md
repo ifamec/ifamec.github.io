@@ -4,6 +4,7 @@
 
 
 - Sept 2020
+    - 2020-09-25: `/tool`: Add nav, csv2md tool v1.0
     - 2020-09-24: `/tool`: csv2md I/O, tool page entrance
     - 2020-09-23: `/tool`: New tool initial
     - 2020-09-22: `/post`: Add responsive design
@@ -17,6 +18,8 @@
     
 ## Env
 ```
-node v 14.10.1
-npm  v 6.14.8
+node    v14.10.1
+npm     v6.14.8
+
+jQuery  v3.5.1
 ```
