@@ -4,6 +4,7 @@
 
 
 - Sept 2020
+    - 2020-09-26: `/tool`: dtcalc tool initial
     - 2020-09-25: `/tool`: Add nav, csv2md tool v1.0
     - 2020-09-24: `/tool`: csv2md I/O, tool page entrance
     - 2020-09-23: `/tool`: New tool initial
