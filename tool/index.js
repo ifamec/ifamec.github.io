@@ -28,6 +28,7 @@ const load_dtcalc = () => {
 	import('./src/dtcalc.js')
 		.then(module => {
 			module.dtcalc_ui('#content')
+			module.dtcalc_fn()
 		})
 		.catch(error => {
 			content.append(`<a>${error}</a>`)
@@ -38,6 +39,4 @@ const empty = () => {
 	history.replaceState(null, null, ' ');
 	content.append('<a>Please Select In Navbar</a>')
 }
-if (window.location.hostname === 'localhost') {
-	load_dtcalc()
-}
+if (window.location.hostname === 'localhost') {}
