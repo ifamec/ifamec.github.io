@@ -1,4 +1,5 @@
-
+'use strict'
+const version = '1.0'
 export const dtcalc_ui = (targetId) => {
 	const make_date = (d) => {
 		return [
@@ -34,7 +35,9 @@ export const dtcalc_ui = (targetId) => {
 					<div class="results" id="c_delta_result"></div>
 				</div>`
 	}
-	$(targetId).append(calc_date() + calc_delta())
+	const ui = `<div id="tool-version"><span>v</span><span>${version}</span></div>
+				${calc_date()} ${calc_delta()}`
+	$(targetId).append(ui)
 	$('.dt_cal').css("padding", "20px 0")
 	$('.results').css({
 		"font-weight": "bold",
