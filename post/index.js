@@ -24,7 +24,7 @@ const buildSidebarList = (list) => {
     list.forEach( i => {
         const title = i.fileName.replace('.md', '')
         const year = getDateInfo(i.birthtime, 'YYYY')
-        const text = `${getDateInfo(i.birthtime, 'MMDD')}-${title}`
+        const text = title
         const a = $('<a title="' + title + '" class="sidebar-btn"> ' + text + ' </a>')
         $(`#sidebar-${year}`).append(a)
     })
@@ -33,6 +33,7 @@ const buildSidebarList = (list) => {
     }
 }
 const loadContent = (url) => {
+    url = url.replace(/[ ]/g, '_')
     url = fileNameList.includes(url) ? url : '404'
     $.ajax({
         type: 'get',
@@ -67,8 +68,8 @@ const loadContent = (url) => {
             isDebugMode = queryObject.get('enableDebugMode') === 'true' || devDebugMode
 
             const fileStat = res.fileStat || {}
-            fileNameList = fileStat.map( o => o.fileName )
-            fileYearList = Array.from(new Set(fileStat.map( o => getDateInfo(o.birthtime, 'YYYY')))).sort()
+            fileNameList = fileStat.map( o => o.fileName.replace(/[ ]/g, '_') )
+            fileYearList = Array.from(new Set(fileStat.map( o => getDateInfo(o.birthtime, 'YYYY')))).sort().reverse()
             latestFileName = fileNameList[0]
             isMobile = matchMedia('(max-width: 480px)').matches
             buildSidebarList(fileStat)
@@ -77,7 +78,7 @@ const loadContent = (url) => {
     })
     // Sidebar Initiation
     const setSidebarWidth = (wid) => {
-        const sidebarWidth = isSidebarHidden ? '0' : (isMobile ? '100%' : '320px')
+        const sidebarWidth = isSidebarHidden ? '0' : (isMobile ? '100%' : '400px')
         $('#sidebar').css('width', wid || sidebarWidth)
     }
     const setSidebarText = (str) => {
