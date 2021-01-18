@@ -17,8 +17,10 @@ if (args.length > 2) {
     title.forEach(postTitle => {
         if (/[^\w]/.test(postTitle)) {
             console.log(`${postTitle} file creation fails, please only use following characters in filename:\n number, uppercase and lowercase letter, '_'(underscore).`)
+        } else if (fs.existsSync(`${postPath}${postTitle}.md`)) {
+            console.log(`${postTitle} exits, please choose another name or modify the existing file`)
         } else {
-            const postHead = `# ${postTitle}\ncreateDate:${getBirthtime()}`
+            const postHead = `# ${postTitle}\n\npost @ ${getBirthtime()}\n\n`
             fs.writeFileSync(`${postPath}${postTitle}.md`, postHead);
         }
     })

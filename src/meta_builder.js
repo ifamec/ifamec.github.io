@@ -8,9 +8,9 @@ const postPath = `${dirname}/post/src/`
 const meta = {}
 const getFileBirthtime = (path) => {
 	const md = fs.readFileSync(path, 'utf8')
-	const lines = md.split('\n').filter(l => /^createDate:\s*\d{4}-\d{2}-\d{2}$/i.test(l))
+	const lines = md.split('\n').filter(l => /^post @\s*\d{4}-\d{2}-\d{2}$/i.test(l.trim()))
 	if (lines.length) {
-		return lines[0].match(/^createDate:(.*)/i)[1].trim()
+		return lines[0].match(/^post @(.*)/i)[1].trim()
 	} else {
 		throw new Error(`createDate not found / format not correct in ${path}`)
 	}

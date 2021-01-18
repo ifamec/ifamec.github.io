@@ -1,5 +1,6 @@
 # macOS 11 Redis Config
-createDate:2021-01-17
+
+post @ 2021-01-17
 
 **Use Homebrew**
 
