@@ -20,7 +20,7 @@ if (args.length > 2) {
         } else if (fs.existsSync(`${postPath}${postTitle}.md`)) {
             console.log(`${postTitle} exits, please choose another name or modify the existing file`)
         } else {
-            const postHead = `# ${postTitle}\n\npost @ ${getBirthtime()}\n\n`
+            const postHead = `# ${postTitle.replace(/_/g, ' ')}\n\npost @ ${getBirthtime()}\n\n`
             fs.writeFileSync(`${postPath}${postTitle}.md`, postHead);
         }
     })

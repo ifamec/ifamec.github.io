@@ -3,6 +3,7 @@
     - webkit behaves odd (backdrop-filter not working, white space shows up while scrolls over)
 
 - Jan 2021
+  - 2021-01-18: `/post`: Modify the title generator, add a post
   - 2021-01-17: `/post`: Fix createData implementation, sidebar year order, add create new post function, add legacy posts
 - Sept 2020
   - 2020-09-27: `/tool`: Finish dtcalc tool phase 1
