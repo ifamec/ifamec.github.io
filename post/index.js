@@ -82,15 +82,21 @@ const loadContent = (url) => {
         $('#sidebar').css('width', wid || sidebarWidth)
     }
     const setSidebarText = (str) => {
-        const sidebarText = str ? str : (isSidebarHidden ? '☰' : '⨉')
-        $('#btn-sidebar').text(sidebarText)
+        const sidebarCondition = ['sidebar-hidden','sidebar-show'].includes(str) ? str :
+            ( isSidebarHidden ? 'sidebar-hidden' : 'sidebar-show')
+        const isHidden = sidebarCondition === 'sidebar-hidden'
+        $('#btn-sidebar').text(isHidden ? '☰' : '⨉')
+        const sidebarTextClassAdd = isHidden ? 'sidebar-hidden' : 'sidebar-show'
+        const sidebarTextClassRemove = isHidden ? 'sidebar-show' : 'sidebar-hidden'
+        $('#btn-sidebar').addClass(sidebarTextClassAdd)
+        $('#btn-sidebar').removeClass(sidebarTextClassRemove)
     }
     const updateSidebar = (w, s) => {
         setSidebarWidth(w)
         setSidebarText(s)
     }
     const hideSidebar = () => {
-        updateSidebar('0px', '☰')
+        updateSidebar('0px', 'sidebar-hidden')
         isSidebarHidden = !isSidebarHidden
     }
     // Initial sidebar state
