@@ -3,7 +3,7 @@ let latestFileName, fileNameList, queryObject, isDebugMode, fileYearList, isMobi
 // Set State
 const devDebugMode = window.location.hostname === 'localhost';
 const isLatestDefault = true;
-let isSidebarHidden = true;
+let isSidebarHidden = false;
 
 // Helper Functions
 const pushState = (url) => { history.pushState(undefined, '', url)}

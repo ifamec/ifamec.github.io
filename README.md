@@ -3,6 +3,7 @@
     - webkit behaves odd (backdrop-filter not working, white space shows up while scrolls over)
 
 - Jan 2021
+  - 2021-01-25: `/post`: modify a post
   - 2021-01-22: add GTM container
   - 2021-01-19: `/post`: add a post
   - 2021-01-18: `/post`: Modify the title generator, add a post
