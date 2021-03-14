@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tool</title>
     <style>
         * {
@@ -20,22 +21,26 @@
             padding: 20px 10px;
             width: 90%;
         }
-        #nav {
+        #nav, .nav {
             font-family: Arial, Helvetica, sans-serif;
             margin: 0;
             padding: 0 5%;
             width: 100%;
             background-color: lightgray;
         }
-        #nav a {
+        #nav a, .nav a {
             display: inline-block;
             text-align: left;
             font-size: 20px;
             padding: 10px 20px;
         }
-        #nav a:hover {
+        #nav a:hover, .nav a:hover {
             cursor: pointer;
             background-color: darkgray;
+        }
+        .nav a {
+            font-size: 14px !important;
+            padding: 10px !important;
         }
     </style>
     <script>if (/(?:MSIE|Trident.*rv:11\.)/i.test(window.navigator.userAgent)) { alert('No IE Support'); window.location = "https://zzhio.com"; }</script>
@@ -44,6 +49,7 @@
 <div id="nav">
     <a id="csv2md">csv2md</a>
     <a id="dtcalc">dtcalc</a>
+    <a id="trunit">unit</a>
     <a id="empty">empty</a>
 </div>
 <div id="content"><a>Please Select In Navbar</a></div>

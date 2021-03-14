@@ -5,6 +5,7 @@ $('#nav').on('click', (e) => {
 	switch (item_id) {
 		case 'csv2md': load_csv2md(); break
 		case 'dtcalc': load_dtcalc(); break
+		case 'trunit': load_trunit(); break
 		case 'empty':  empty();       break
 	}
 })
@@ -29,6 +30,18 @@ const load_dtcalc = () => {
 		.then(module => {
 			module.dtcalc_ui('#content')
 			module.dtcalc_fn()
+		})
+		.catch(error => {
+			content.append(`<a>${error}</a>`)
+		})
+}
+const load_trunit = () => {
+	content.empty()
+	pushState('#trunit')
+	import('./src/trunit.js')
+		.then(module => {
+			module.unit_ui('#content')
+			module.unit_fn()
 		})
 		.catch(error => {
 			content.append(`<a>${error}</a>`)
