@@ -1,9 +1,6 @@
 'use strict'
 const version = '1.0'
-const functions = {
-    length:['kilometre', 'metre', 'centimeter', 'mile', 'yard', 'foot', 'inch', '里', '丈', '尺', '寸', '分', '厘', 'decimeter', 'millimeter', 'micrometer', 'nautical mile', 'fathom', 'fur'],
-}
-const header = `<div style='padding-bottom: 10px'><span id='tool-version'>v ${version}</span>Current: <span id='current-content'></span></div>
+const header = `<div style='padding-bottom: 10px'><span id='tool-version'>v ${version}</span>Current: <span id='current-content'></span> | Hit <b>Enter</b> To Execute</div>
                 <div class='nav'>
                     <a id='nav_length'>Length</a>
                     <a id='nav_temperature'>Temperature</a>
@@ -16,22 +13,41 @@ const header = `<div style='padding-bottom: 10px'><span id='tool-version'>v ${ve
                 </div>`
 const unit_template = (fn) => {
     const currentContent = fn || 'length'
-    const fields = functions[currentContent]
     const label = $('#current-content')
-    if (!fields) {
-        label.text('Error')
-        return `<b>Error</b>`
-    }
-    label.text(currentContent)
-    let rtnval = ``
-    fields.forEach(item => {
-        const input =  `<div class="unit-item">
-                            <label class="label">${item}</label>
-                            <input class="value" id="${item}" name="${item}"/>
-                        </div>`
-        rtnval += input
-    })
-    return rtnval
+    const form = $('#unit-content')
+    import (`./utils/unit_sets.js`)
+        .then(module => {
+            const set = module[`unit_${currentContent}`]
+            const fields = Object.keys(set.relation)
+            label.text(currentContent)
+            let content = ``
+            fields.forEach(item => {
+                const input =  `<div class="unit-item">
+                                    <label class="unit-label">${set.mapping[item] || item}</label>
+                                    <input class="unit-value" id="${item}" name="${item}" type="number" step="any"/>
+                                </div>`
+                content += input
+            })
+            // inputs
+            form.html(content + `<div class="unit-item" style="text-align: center"><div id="clearAll" >Clear All</div></div>`)
+            form.get(0).addEventListener('change', (e) => {
+                const [value, id] = [e.target.value, e.target.id]
+                if (value === '') {return;}
+                console.log(value, id)
+                const sanitize = Number(value) * set.relation[id]
+                fields.forEach(id => {
+                    $(`#${id}`).val(sanitize / set.relation[id])
+                })
+            })
+            $('#clearAll').on('click', () => {
+                fields.forEach(id => {
+                    $(`#${id}`).val('')
+                })
+            })
+        })
+        .catch(error => {
+            label.text('Error: ' + error)
+        })
 }
 export const unit_ui = (targetId) => {
     $(`<style>
@@ -44,14 +60,18 @@ export const unit_ui = (targetId) => {
             display:  inline-block;
             padding: 10px 5%;
         }
-        .label {
+        .unit-label {
             width: 30%;
             display:  inline-block;
             text-align: right;
         }
-        .value {
+        .unit-value {
             width: 60%;
             font-size: 20px;
+        }
+        #clearAll {
+            cursor: pointer;
+            background-color: lightgray;
         }
        
         @media only screen and (max-width: 480px) {
@@ -60,14 +80,13 @@ export const unit_ui = (targetId) => {
             }
         }
     </style>`).appendTo('head')
-    const ui = header + `<div id="unit-content"></div>`
-    $(targetId).append(ui)
-    $('#unit-content').html(unit_template())
+    $(targetId).append(header + `<form id="unit-content"></form>`)
+    unit_template()
 }
 export const unit_fn = () => {
     // Load
     $('.nav a').on('click', (e) => {
         const id = e.currentTarget.id
-        $('#unit-content').html(unit_template(id.replace('nav_', '')))
+        unit_template(id.replace('nav_', ''))
     })
 }
