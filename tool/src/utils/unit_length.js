@@ -1,5 +1,4 @@
 const foot_meter = 1 / 3.2808
-const form = $('#unit-content')
 const unit_length = {
     'kilometer':  {ratio: 1000,                 map: ''             },
     'meter':      {ratio: 1,                    map: ''             },
@@ -21,7 +20,7 @@ const unit_length = {
     'fen':        {ratio: 1 / 300,              map: "分"           },
     'lii':        {ratio: 1 / 3000,             map: "厘"           }
 }
-export const exec = () => {
+export const exec = (form) => {
     const fields = Object.keys(unit_length)
     let content = ``
     fields.forEach(item => {

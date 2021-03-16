@@ -17,7 +17,7 @@ const unit_template = (fn) => {
     import (`./utils/unit_${currentContent}.js`)
         .then(module => {
             label.text(currentContent)
-            module.exec(currentContent)
+            module.exec($('#unit-content'))
         })
         .catch(error => {
             label.text('Error: ' + error)
