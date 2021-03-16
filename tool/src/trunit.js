@@ -14,10 +14,10 @@ const header = `<div style='padding-bottom: 10px'><span id='tool-version'>v ${ve
 const unit_template = (fn) => {
     const currentContent = fn || 'length'
     const label = $('#current-content')
-    import (`./utils/unit_${currentContent}.js`)
+    import (`./utils/unit.js`)
         .then(module => {
             label.text(currentContent)
-            module.exec($('#unit-content'))
+            module.exec(currentContent)
         })
         .catch(error => {
             label.text('Error: ' + error)
