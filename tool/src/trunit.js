@@ -14,36 +14,10 @@ const header = `<div style='padding-bottom: 10px'><span id='tool-version'>v ${ve
 const unit_template = (fn) => {
     const currentContent = fn || 'length'
     const label = $('#current-content')
-    const form = $('#unit-content')
-    import (`./utils/unit_sets.js`)
+    import (`./utils/unit_${currentContent}.js`)
         .then(module => {
-            const set = module[`unit_${currentContent}`]
-            const fields = Object.keys(set.relation)
             label.text(currentContent)
-            let content = ``
-            fields.forEach(item => {
-                const input =  `<div class="unit-item">
-                                    <label class="unit-label">${set.mapping[item] || item}</label>
-                                    <input class="unit-value" id="${item}" name="${item}" type="number" step="any"/>
-                                </div>`
-                content += input
-            })
-            // inputs
-            form.html(content + `<div class="unit-item" style="text-align: center"><div id="clearAll" >Clear All</div></div>`)
-            form.get(0).addEventListener('change', (e) => {
-                const [value, id] = [e.target.value, e.target.id]
-                if (value === '') {return;}
-                console.log(value, id)
-                const sanitize = Number(value) * set.relation[id]
-                fields.forEach(id => {
-                    $(`#${id}`).val(sanitize / set.relation[id])
-                })
-            })
-            $('#clearAll').on('click', () => {
-                fields.forEach(id => {
-                    $(`#${id}`).val('')
-                })
-            })
+            module.exec(currentContent)
         })
         .catch(error => {
             label.text('Error: ' + error)
