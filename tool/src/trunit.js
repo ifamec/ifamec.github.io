@@ -3,12 +3,12 @@ const version = '1.0'
 const header = `<div id="msg" style='padding-bottom: 10px'><span id='tool-version'>v ${version}</span>Current: <span id='current-content'></span> | Hit <b>Enter</b> To Execute</div>
                 <div class='nav'>
                     <a id='nav_length'>Length</a>
-                    <a id='nav_temperature'>Temperature</a>
-                    <a id='nav_power'>Power</a>
-                    <a id='nav_speed'>Speed</a>
                     <a id='nav_mass'>Mass</a>
-                    <a id='nav_area'>Area</a>
+                    <a id='nav_temperature'>Temperature</a>
                     <a id='nav_volume'>Volume</a>
+                    <a id='nav_area'>Area</a>
+                    <a id='nav_speed'>Speed</a>
+                    <a id='nav_power'>Power</a>
                     <a id='nav_pressure'>Pressure</a>
                 </div>`
 const unit_template = (fn) => {

@@ -45,6 +45,16 @@ const unit_sets = {
         'tounce':     {ratio: tGrain_grain * 480,   map: "Troy Ounce"                           },
         'tdwt':       {ratio: tGrain_grain * 24,    map: "Troy Penny Weight"                    },
     },
+    'power': {
+        'watt':  {ratio: 0.001,             map: "Watt (J/s, N·m/s)"    },
+        'kwatt': {ratio: 1,                 map: "Kilowatt"             },
+        'ih':    {ratio: 0.745712172,       map: "Imperial Horsepower"  },
+        'mh':    {ratio: 0.7352941,         map: "Metric Horsepower"    },
+        'kgms':  {ratio: 0.0098039215,      map: "kg·m/s"               },
+        'kcals': {ratio: 4.1841004,         map: "kcal/s"               },
+        'btu':   {ratio: 1.05507491,        map: "btu/s"                },
+        'ftlbs': {ratio: 0.0013557483731,   map: "ft·lb/s"              }
+    },
     'temperature': {
         'celsius':    {map: "Celsius"   },
         'fahrenheit': {map: "Fahrenheit"},
