@@ -1,6 +1,6 @@
 'use strict'
 const version = '1.0'
-const header = `<div style='padding-bottom: 10px'><span id='tool-version'>v ${version}</span>Current: <span id='current-content'></span> | Hit <b>Enter</b> To Execute</div>
+const header = `<div id="msg" style='padding-bottom: 10px'><span id='tool-version'>v ${version}</span>Current: <span id='current-content'></span> | Hit <b>Enter</b> To Execute</div>
                 <div class='nav'>
                     <a id='nav_length'>Length</a>
                     <a id='nav_temperature'>Temperature</a>

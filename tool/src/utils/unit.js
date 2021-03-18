@@ -44,9 +44,85 @@ const unit_sets = {
         'tpound':     {ratio: tGrain_grain * 5760,  map: "Troy Pound"                           },
         'tounce':     {ratio: tGrain_grain * 480,   map: "Troy Ounce"                           },
         'tdwt':       {ratio: tGrain_grain * 24,    map: "Troy Penny Weight"                    },
+    },
+    'temperature': {
+        'celsius':    {map: "Celsius"   },
+        'fahrenheit': {map: "Fahrenheit"},
+        'kelvin':     {map: "Kelvin"    },
+        'rankine':    {map: "Rankine"   },
+        'reaumur':    {map: "Reaumur"   }
     }
 }
-
+const handleTemperature = (value, id) => {
+    let result = {}, errMsg
+    switch (id) {
+        case 'celsius':
+            if(value < -273.15) {
+                errMsg = 'Celsius Should >= -273.15'
+            } else {
+                result.celsius = value
+                result.fahrenheit = 32 + (value * 9 / 5)
+                result.kelvin = value + 273.15
+                result.rankine = result.kelvin * 1.8
+                result.reaumur = value / 1.25
+            }
+            break;
+        case 'fahrenheit':
+            if(value < -459.666666) {
+                errMsg = 'Fahrenheit Should >= -459.67'
+            } else {
+                result.fahrenheit = value
+                result.celsius = (value - 32) * 5 / 9
+                result.kelvin = result.celsius + 273.15
+                result.rankine = result.kelvin * 1.8
+                result.reaumur = result.celsius / 1.25
+            }
+            break;
+        case 'kelvin':
+            if(value < 0) {
+                errMsg = 'Kelvin Should >= 0'
+            } else {
+                result.kelvin = value
+                result.celsius = value - 273.15
+                result.fahrenheit = 32 + (result.celsius * 9 / 5)
+                result.rankine = value * 1.8
+                result.reaumur = result.celsius / 1.25
+            }
+            break;
+        case 'rankine':
+            if(value < 0) {
+                errMsg = 'Rankine Should >= 0'
+            } else {
+                result.rankine = value
+                result.kelvin = value / 1.8
+                result.celsius = result.kelvin - 273.15
+                result.fahrenheit = 32 + (result.celsius * 9 / 5)
+                result.reaumur = result.celsius / 1.25
+            }
+            break;
+        case 'reaumur':
+            if(value < -218.5199999999) {
+                errMsg = 'Rankine Should >= -218.5199999999'
+            } else {
+                result.reaumur = value
+                result.celsius = value * 1.25
+                result.kelvin = result.celsius + 273.15
+                result.fahrenheit = 32 + (result.celsius * 9 / 5)
+                result.rankine = result.kelvin * 1.8
+            }
+            break;
+    }
+    if (errMsg) {
+        alert(`Error: ${errMsg}, Please Retry.\nDo you want clear all fields?`)
+        $('#clearAll').trigger('click')
+    } else {
+        $(`#celsius`).val(result.celsius)
+        $(`#fahrenheit`).val(result.fahrenheit)
+        $(`#kelvin`).val(result.kelvin)
+        $(`#rankine`).val(result.rankine)
+        $(`#reaumur`).val(result.reaumur)
+    }
+}
 export const getIds = (current) => {
     return Object.keys(unit_sets[current]) || null;
 }
@@ -68,7 +144,7 @@ export const handler = (current, ids, e) => {
     const [value, id] = [e.target.value, e.target.id]
     if (value === '' || id === '') {return}
     if (current === 'temperature') {
-
+        handleTemperature(Number(value), id)
     } else {
         const set = unit_sets[current]
         const curRatio = set[id] && set[id]["ratio"]
