@@ -34,8 +34,8 @@ const unit_sets = {
         'qian':       {ratio: 0.005,                map: "钱"                                   },
         'blton':      {ratio: kg_pound * 2240,      map: "British Long Ton"                     },
         'uston':      {ratio: kg_pound * 2000,      map: "US Short Ton"                         },
-        'bcwt':       {ratio: kg_pound * 112,       map: "British Long Hundred Weight (cwt)"    },
-        'ucwt':       {ratio: kg_pound * 100,       map: "US Short Hundred Weight (cwt)"        },
+        'bcwt':       {ratio: kg_pound * 112,       map: "British Long Hundredweight (cwt)"     },
+        'ucwt':       {ratio: kg_pound * 100,       map: "US Short Hundredweight (cwt)"         },
         'stone':      {ratio: kg_pound * 14,        map: "Stone"                                },
         'lb':         {ratio: kg_pound,             map: "Pound (lb)"                           },
         'oz':         {ratio: kg_pound / 16,        map: "Ounce (oz)"                           },
@@ -46,33 +46,36 @@ const unit_sets = {
         'tdwt':       {ratio: tGrain_grain * 24,    map: "Troy Penny Weight"                    },
     }
 }
-export const exec = (current) => {
-    const form = $('#unit-content')
-    const set = unit_sets[current]
-    const fields = Object.keys(set)
+
+export const getIds = (current) => {
+    return Object.keys(unit_sets[current]) || null;
+}
+export const getDom = (current) => {
+    const fields = getIds(current);
+    if (! fields) {return}
     let content = ``
     fields.forEach(item => {
         const input =  `<div class="unit-item">
-                            <label class="unit-label">${set[item]["map"] || item}</label>
+                            <label class="unit-label">${unit_sets[current][item]["map"] || item}</label>
                             <input class="unit-value" id="${item}" name="${item}" type="number" step="any"/>
                         </div>`
         content += input
     })
-    // inputs
-    form.html(content + `<div class="unit-item" style="text-align: center"><div id="clearAll" >Clear All</div></div>`)
-    form.get(0).addEventListener('change', (e) => {
-        const [value, id] = [e.target.value, e.target.id]
+    content += `<div class="unit-item" style="text-align: center"><div id="clearAll" >Clear All</div></div>`
+    return content
+}
+export const handler = (current, ids, e) => {
+    const [value, id] = [e.target.value, e.target.id]
+    if (value === '' || id === '') {return}
+    if (current === 'temperature') {
+
+    } else {
+        const set = unit_sets[current]
         const curRatio = set[id] && set[id]["ratio"]
-        if (value === '' && curRatio) {return;}
         // console.log(value, id)
         const sanitize = Number(value) * curRatio
-        fields.forEach(id => {
+        ids.forEach(id => {
             $(`#${id}`).val(sanitize / set[id]["ratio"])
         })
-    })
-    $('#clearAll').on('click', () => {
-        fields.forEach(id => {
-            $(`#${id}`).val('')
-        })
-    })
+    }
 }

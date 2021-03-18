@@ -12,12 +12,27 @@ const header = `<div style='padding-bottom: 10px'><span id='tool-version'>v ${ve
                     <a id='nav_pressure'>Pressure</a>
                 </div>`
 const unit_template = (fn) => {
+    $('#unit-content').remove()
+    $('.nav').parent().append(`<form id="unit-content"></form>`)
     const currentContent = fn || 'length'
     const label = $('#current-content')
     import (`./utils/unit.js`)
         .then(module => {
+            const form = $('#unit-content')
             label.text(currentContent)
-            module.exec(currentContent)
+            const DOM = module.getDom(currentContent)
+            const Ids = module.getIds(currentContent)
+            if (! DOM || ! Ids) {return}
+            // inputs
+            form.html(DOM)
+            form.get(0).addEventListener('change', (e) => {
+                module.handler(currentContent, Ids, e)
+            })
+            $('#clearAll').on('click', () => {
+                Ids.forEach(id => {
+                    $(`#${id}`).val('')
+                })
+            })
         })
         .catch(error => {
             label.text('Error: ' + error)
