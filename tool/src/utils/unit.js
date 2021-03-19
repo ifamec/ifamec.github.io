@@ -4,6 +4,21 @@ const tGrain_grain = 0.45359237 / 7000
 const cubicInch = 0.016387064
 const uk_gallon = 4.54609
 const unit_sets = {
+    'area': {
+        'skm':  {ratio: 1000000,                                map: "Square Kilometer (km2)" },
+        'ha':   {ratio: 10000,                                  map: "Hectare (ha)"           },
+        'sq':   {ratio: 1,                                      map: "Square Meter (m2)"      },
+        'are':  {ratio: 10000 / 15,                             map: "Are"                    },
+        'sdm':  {ratio: 0.01,                                   map: "Square Decimeter (dm2)" },
+        'scm':  {ratio: 0.0001,                                 map: "Square Centimeter (cm2)"},
+        'smm':  {ratio: 0.000001,                               map: "Square Millimeter (mm2)"},
+        'sf':   {ratio: 0.3048 * 0.3048,                        map: "Square Foot (sq ft)"    },
+        'sy':   {ratio: 0.3048 * 0.3048 * 9,                    map: "Square Yard (sq yd)"    },
+        'sr':   {ratio: 0.3048 * 0.3048 * 16.5 * 16.5,          map: "Square Rod (sq rd)"     },
+        'acre': {ratio: 160 * 0.3048 * 0.3048 * 16.5 * 16.5,    map: "Acre"                   },
+        'sm':   {ratio: 0.3048 * 0.3048 * 5280 * 5280,          map: "Square Mile (sq mi)"    },
+        'si':   {ratio: 0.3048 * 0.3048 / 144,                  map: "Square Inch (sq in)"    }
+    },
     'length': {
         'kilometer':  {ratio: 1000,                 map: "Kilometer"    },
         'meter':      {ratio: 1,                    map: "Meter"        },

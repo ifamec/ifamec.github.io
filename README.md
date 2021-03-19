@@ -2,6 +2,7 @@
 - Remain Issue
     - webkit behaves odd (backdrop-filter not working, white space shows up while scrolls over)
 - March 2021
+  - 2021-03-19: `/tool`: add area
   - 2021-03-18: `/tool`: add volume & pressure & speed
   - 2021-03-17: `/tool`: refactor & add temperature, power
   - 2021-03-15: `/tool`: refactor length & add mass 
