@@ -57,6 +57,21 @@ const unit_sets = {
         'btu':   {ratio: 1.05507491,        map: "btu/s"                },
         'ftlbs': {ratio: 0.0013557483731,   map: "ft·lb/s"              }
     },
+    'pressure': {
+        'atm':    {ratio: 101325,               map: "Standard atmosphere"                      },
+        'bar':    {ratio: 100000,               map: "Bar (bar)"                                },
+        'mbar':   {ratio: 100000,               map: "Millibar (mbar)"                          },
+        'kpa':    {ratio: 1000,                 map: "Kilopascal (kPa)"                         },
+        'hpa':    {ratio: 100,                  map: "Hectopascal (hPa)"                        },
+        'pa':     {ratio: 1,                    map: "Pascal (Pa, N/m2)"                        },
+        'mmhg':   {ratio: 101325 / 760,         map: "Millimeter of mercury (mmHg)"             },
+        'inhg':   {ratio: 25.4 * 101325 / 760,  map: "Inch of mercury (inHg)"                   },
+        'psqf':   {ratio: 6894.757 / 144,       map: "Pound / Square Feet (lbf/ft2)"            },
+        'psqi':   {ratio: 6894.757,             map: "Pound / Square Inch (lbf/in2)"            },
+        'kgsqm':  {ratio: 9.80665,              map: "Kilogram / Square Meter (kgf/m2)"         },
+        'kgsqcm': {ratio: 98066.5,              map: "Kilogram / Square Centimeter (kgf/cm2)"   },
+        'mmh2o':  {ratio: 1 / 0.101972,         map: "Millimeter of water (mmH2O)"              }
+    },
     'volume': {
         'm3':          {ratio: 1000,                            map: "Cubic meter (m3)"                       },
         'hl':          {ratio: 1000,                            map: "Hectoliter (hl)"                        },
@@ -92,7 +107,7 @@ const unit_sets = {
         'uk_bushel':   {ratio: 8 * uk_gallon,                   map: "UK Bushel"                              },
         'uk_gallon':   {ratio: uk_gallon,                       map: "UK Gallon (gal)"                        },
         'uk_pint':     {ratio: uk_gallon / 8,                   map: "UK Pint (pt)"                           },
-        'uk_fl_oz':    {ratio: uk_gallon / 160,                 map: "UK Fluid Ounce (fl oz)"                 },
+        'uk_fl_oz':    {ratio: uk_gallon / 160,                 map: "UK Fluid Ounce (fl oz)"                 }
     },
 
     'temperature': {
