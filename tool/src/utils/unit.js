@@ -72,6 +72,13 @@ const unit_sets = {
         'kgsqcm': {ratio: 98066.5,              map: "Kilogram / Square Centimeter (kgf/cm2)"   },
         'mmh2o':  {ratio: 1 / 0.101972,         map: "Millimeter of water (mmH2O)"              }
     },
+    'speed': {
+        'mach':  {ratio: 340.29,            map: "Mach (M)"                 },
+        'mps':   {ratio: 1,                 map: "Meter per second (m/s)"   },
+        'knots': {ratio: 1/1.9438444924,    map: "Knots (kts)"              },
+        'mph':   {ratio: 1/2.23694,         map: "Mile per Hour (mph)"      },
+        'kph':   {ratio: 1/3.6,             map: "Kilometer per Hour (kph)" },
+    },
     'volume': {
         'm3':          {ratio: 1000,                            map: "Cubic meter (m3)"                       },
         'hl':          {ratio: 1000,                            map: "Hectoliter (hl)"                        },
