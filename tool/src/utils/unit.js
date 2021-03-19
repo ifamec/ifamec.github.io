@@ -1,6 +1,8 @@
 const foot_meter = 1 / 3.2808
 const kg_pound = 0.45359237
 const tGrain_grain = 0.45359237 / 7000
+const cubicInch = 0.016387064
+const uk_gallon = 4.54609
 const unit_sets = {
     'length': {
         'kilometer':  {ratio: 1000,                 map: "Kilometer"    },
@@ -55,6 +57,44 @@ const unit_sets = {
         'btu':   {ratio: 1.05507491,        map: "btu/s"                },
         'ftlbs': {ratio: 0.0013557483731,   map: "ft·lb/s"              }
     },
+    'volume': {
+        'm3':          {ratio: 1000,                            map: "Cubic meter (m3)"                       },
+        'hl':          {ratio: 1000,                            map: "Hectoliter (hl)"                        },
+        'dal':         {ratio: 1000,                            map: "Decaliter (dal)"                        },
+        'l':           {ratio: 1,                               map: "Liter (l), Cubic decimeter (dm3)"       },
+        'dl':          {ratio: 0.1,                             map: "Deciliter (dl)"                         },
+        'cl':          {ratio: 0.01,                            map: "Centiliter (cl)"                        },
+        'ml':          {ratio: 0.001,                           map: "Milliliter (ml), Cubic centimeter (cm3)"},
+        'mml':         {ratio: 0.000001,                        map: "Cubic millimeter (mm3)"                 },
+        'tables':      {ratio: 0.015,                           map: "Table Spoon"                            },
+        'teas':        {ratio: 0.005,                           map: "Tea Spoon"                              },
+        'usc_afoot':   {ratio: 43560 * 1728 * cubicInch,        map: "Cubic Acer Foot"                        },
+        'usc_yard':    {ratio: 27 * 1728 * cubicInch,           map: "Cubic Yard"                             },
+        'usc_foot':    {ratio: 1728 * cubicInch,                map: "Cubic Foot"                             },
+        'usc_inch':    {ratio: cubicInch,                       map: "Cubic Inch"                             },
+        'usl_barrel':  {ratio: 42 * 231 * cubicInch,            map: "US F Barrel (42 Gallon)"                },
+        'usl_gallon':  {ratio: 231 * cubicInch,                 map: "US F Gallon"                            },
+        'usl_quart':   {ratio: 231 * cubicInch / 4,             map: "US F Quart (qt)"                        },
+        'usl_pint':    {ratio: 231 * cubicInch / 8,             map: "US F Pint (pt)"                         },
+        'usl_gill':    {ratio: 231 * cubicInch / 32,            map: "US F Gill (gi)"                         },
+        'usl_fl_oz':   {ratio: 231 * cubicInch / 128,           map: "US Fluid Ounce (fl oz)"                 },
+        'usl_fl_dram': {ratio: 231 * cubicInch / 1024,          map: "US Fluid Dram (dr)"                     },
+        'usl_minim':   {ratio: 231 * cubicInch / 128 / 61440,   map: "US F Minim (min)"                       },
+        'us_cup':      {ratio: 231 * cubicInch / 16,            map: "US Cup"                                 },
+        'us_tables':   {ratio: 231 * cubicInch / 256,           map: "US Table Spoon"                         },
+        'us_teas':     {ratio: 231 * cubicInch / 768,           map: "US Tea Spoon"                           },
+        'usd_barrel':  {ratio: 7056 * cubicInch,                map: "US Barrel"                              },
+        'usd_bushel':  {ratio: 2150.42 * cubicInch,             map: "US Bushel (bu)"                         },
+        'usd_peck':    {ratio: 2150.42 * cubicInch / 4,         map: "US Peck (pk)"                           },
+        'usd_quart':   {ratio: 2150.42 * cubicInch / 32,        map: "US Quart (qt)"                          },
+        'usd_pint':    {ratio: 2150.42 * cubicInch / 64,        map: "US Pint (pt)"                           },
+        'uk_barrel':   {ratio: 36 * uk_gallon,                  map: "UK Barrel"                              },
+        'uk_bushel':   {ratio: 8 * uk_gallon,                   map: "UK Bushel"                              },
+        'uk_gallon':   {ratio: uk_gallon,                       map: "UK Gallon (gal)"                        },
+        'uk_pint':     {ratio: uk_gallon / 8,                   map: "UK Pint (pt)"                           },
+        'uk_fl_oz':    {ratio: uk_gallon / 160,                 map: "UK Fluid Ounce (fl oz)"                 },
+    },
+
     'temperature': {
         'celsius':    {map: "Celsius"   },
         'fahrenheit': {map: "Fahrenheit"},
