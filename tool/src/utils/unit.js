@@ -220,17 +220,17 @@ export const getDom = (current) => {
     let content = ``
     fields.forEach(item => {
         const input =  `<div class="unit-item">
-                            <label class="unit-label">${unit_sets[current][item]["map"] || item}</label>
                             <input class="unit-value" id="${item}" name="${item}" type="number" step="any"/>
+                            <label class="unit-label">${unit_sets[current][item]["map"] || item}</label>
                         </div>`
         content += input
     })
-    content += `<div class="unit-item" style="text-align: center"><div id="clearAll" >Clear All</div></div>`
+    content += `<div class="unit-item"><div id="clearAll" style="text-align: center">Clear All</div></div>`
     return content
 }
 export const handler = (current, ids, e) => {
     const [value, id] = [e.target.value, e.target.id]
-    if (value === '' || id === '') {return}
+    if (value.trim() === '' || isNaN(value) || id === '') {return}
     if (current === 'temperature') {
         handleTemperature(Number(value), id)
     } else {
@@ -242,4 +242,29 @@ export const handler = (current, ids, e) => {
             $(`#${id}`).val(sanitize / set[id]["ratio"])
         })
     }
+}
+export const lengthCombination = () => {
+    const content = `<hr/>
+        <form id="unit-c-content">
+            <div class="unit-item">
+                <input class="unit-c-value" id="lft" name="Ft" type="number" step="any"/>
+                <label class="unit-c-label">Ft</label>
+                <input class="unit-c-value" id="lin" name="In" type="number" step="any"/>
+                <label class="unit-c-label">In</label>
+            </div>
+            <div class="unit-item">
+                <input class="unit-value" id="lcm" name="CM" type="number" step="any"/>
+                <label class="unit-label">CM</label>
+            </div>
+            <div class="unit-item">
+                <input class="unit-value" id="lfeet" name="Feet" type="number" step="any"/>
+                <label class="unit-label">Feet</label>
+            </div>
+            <div class="unit-item">
+                <input class="unit-value" id="linches" name="Inches" type="number" step="any"/>
+                <label class="unit-label">Inches</label>
+            </div>
+            <div class="unit-item"><div id="clear" style="text-align: center">Clear</div></div>
+        </form>`
+    $(content).appendTo($('#content'))
 }

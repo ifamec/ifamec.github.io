@@ -33,6 +33,10 @@ const unit_template = (fn) => {
                     $(`#${id}`).val('')
                 })
             })
+            // console.log(Ids)
+            if (currentContent === 'length') {
+                module.lengthCombination()
+            } else if (currentContent === 'mass') {}
         })
         .catch(error => {
             label.text('Error: ' + error)
@@ -40,7 +44,7 @@ const unit_template = (fn) => {
 }
 export const unit_ui = (targetId) => {
     $(`<style>
-        .unit-content {
+        .unit-content, .unit-c-content {
             padding: 10px 0;
         }
         .unit-item {
@@ -52,13 +56,22 @@ export const unit_ui = (targetId) => {
         .unit-label {
             width: 30%;
             display:  inline-block;
-            text-align: right;
+            text-align: left;
         }
         .unit-value {
             width: 60%;
             font-size: 20px;
         }
-        #clearAll {
+        .unit-c-label {
+            width: 10%;
+            display:  inline-block;
+            text-align: left;
+        }
+        .unit-c-value {
+            width: 30%;
+            font-size: 20px;
+        }
+        #clearAll, #clear {
             cursor: pointer;
             background-color: lightgray;
         }
