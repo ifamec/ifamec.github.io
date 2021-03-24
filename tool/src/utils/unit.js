@@ -244,27 +244,25 @@ export const handler = (current, ids, e) => {
     }
 }
 export const lengthCombination = () => {
-    const content = `<hr/>
-        <form id="unit-c-content">
-            <div class="unit-item">
-                <input class="unit-c-value" id="lft" name="Ft" type="number" step="any"/>
-                <label class="unit-c-label">Ft</label>
-                <input class="unit-c-value" id="lin" name="In" type="number" step="any"/>
-                <label class="unit-c-label">In</label>
-            </div>
-            <div class="unit-item">
-                <input class="unit-value" id="lcm" name="CM" type="number" step="any"/>
-                <label class="unit-label">CM</label>
-            </div>
-            <div class="unit-item">
-                <input class="unit-value" id="lfeet" name="Feet" type="number" step="any"/>
-                <label class="unit-label">Feet</label>
-            </div>
-            <div class="unit-item">
-                <input class="unit-value" id="linches" name="Inches" type="number" step="any"/>
-                <label class="unit-label">Inches</label>
-            </div>
-            <div class="unit-item"><div id="clear" style="text-align: center">Clear</div></div>
-        </form>`
-    $(content).appendTo($('#content'))
+    const content = `<div class="unit-c-item">
+                        <input class="unit-c-value" id="Ft" name="Ft" type="number" step="any"/>
+                        <label class="unit-c-label">Ft</label>
+                        <input class="unit-c-value" id="In" name="In" type="number" step="any"/>
+                        <label class="unit-c-label">In</label>
+                    </div>` +
+                    `<div class="unit-c-item">
+                            <input class="unit-value" id="CM" name="CM" type="number" step="any"/>
+                            <label class="unit-label">CM</label>
+                        </div>` +
+                    `<div class="unit-c-item">
+                            <input class="unit-value" id="Feet" name="Feet" type="number" step="any"/>
+                            <label class="unit-label">Feet</label>
+                        </div>` +
+                    `<div class="unit-c-item">
+                            <input class="unit-value" id="Inches" name="Inches" type="number" step="any"/>
+                            <label class="unit-label">Inches</label>
+                        </div>` +
+                    `<div class="unit-c-item"><div id="clear" style="text-align: center">Clear</div></div>`
+    $(`<hr/><form id="unit-c-content"></form>`).appendTo($('#content'))
+    $('#unit-c-content').append(content)
 }

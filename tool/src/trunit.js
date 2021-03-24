@@ -47,7 +47,7 @@ export const unit_ui = (targetId) => {
         .unit-content, .unit-c-content {
             padding: 10px 0;
         }
-        .unit-item {
+        .unit-item, .unit-c-item {
             width: 50%;
             font-size: 16px;
             display:  inline-block;
